@@ -37,7 +37,7 @@ mongo.connect('mongodb://127.0.0.1/mongochat', function(err, db){
         socket.on('input', function(data){
             let name = data.name;
             let message = data.message;
-
+            let id = Date.now().toString();
             // Check for name and message
             if(name == '' || message == ''){
                 // Send error status
@@ -46,7 +46,7 @@ mongo.connect('mongodb://127.0.0.1/mongochat', function(err, db){
 
                 // link preview integration
                 if(urlValidation(message)){
-                    chat.insert({name: name, message: message}, function(){
+                    chat.insert({name: name, message: message, id : id }, function(){
                         client.emit('output', [data]);
 
                         // Send status object
@@ -72,7 +72,7 @@ mongo.connect('mongodb://127.0.0.1/mongochat', function(err, db){
                         });*/
                         //#endregion
                     
-                        socket.emit('updates', urlData);
+                        socket.emit('updates', (urlData,id));
                     })
                     
 

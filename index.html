@@ -78,7 +78,10 @@
                             // Build out message div
                             var message = document.createElement('div');
                             message.setAttribute('class', 'chat-message');
+                            message.setAttribute('id',data[x].id);
                             //link preview integration*************************************************************************
+                            
+                            //#region Solution 1
                             if(data[x].link){
                                 message.textContent = data[x].name+": "+ data[x].message;
                                 var urlDiv = document.createElement('div');
@@ -91,6 +94,8 @@
                             }else{
                                 message.textContent = data[x].name+": "+ data[x].message;
                             }
+                            //#endregion
+
                             messages.appendChild(message);
                             messages.insertBefore(message, messages.firstChild);
                         }
@@ -99,8 +104,20 @@
 
                 socket.on('updates',function(data){
                     if(data.length){
+                        var messageToUpdate = element(data.id);
                         for(var x = 0; x < data.length; x++){
+                            var messagePreview = document.createElement('div');
                             
+                            var aLink = document.createElement('a');
+                            aLink.setAttribute('href',data.urlData.link);
+                            var imgLink = document.createElement('img')
+                            imgLink.setAttribute('src',data.urlData.img);
+                            messagePreview.appendChild(aLink);
+                            messagePreview.appendChild(imgLink);
+                            
+                            
+                            messageToUpdate.appendChild(messagePreview);
+
                         }
                     }
                 })

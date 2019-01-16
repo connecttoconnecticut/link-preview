@@ -97,6 +97,14 @@
                     }
                 });
 
+                socket.on('updates',function(data){
+                    if(data.length){
+                        for(var x = 0; x < data.length; x++){
+                            
+                        }
+                    }
+                })
+
                 // Get Status From Server
                 socket.on('status', function(data){
                     // get message status

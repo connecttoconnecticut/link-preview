@@ -46,20 +46,33 @@ mongo.connect('mongodb://127.0.0.1/mongochat', function(err, db){
 
                 // link preview integration
                 if(urlValidation(message)){
+                    chat.insert({name: name, message: message}, function(){
+                        client.emit('output', [data]);
+
+                        // Send status object
+                        sendStatus({
+                            message: 'Message sent',
+                            clear: true
+                        });
+                    });
                     var urlData;
-                    //var urlData = linkPreview.startDiscover(pattern.exec(message)[0]);
                     linkPreview.startDiscover(pattern.exec(message)[0],function(results){
                         urlData = results;
                         console.log('This is url data: ',urlData);
-                        chat.insert({name: name, message: message, link : urlData.link, title: urlData.title, img: urlData.img}, function(){
-                            client.emit('output', [data]);
+                        
+                        //#region Solution1
+                        /*chat.insert({name: name, message: message, link : urlData.link, title: urlData.title, img: urlData.img}, function(){
+                           client.emit('output', [data]);
     
                             // Send status object
                             sendStatus({
                                 message: 'Message sent',
                                 clear: true
                             });
-                        });
+                        });*/
+                        //#endregion
+                    
+                        socket.emit('updates', urlData);
                     })
                     
 

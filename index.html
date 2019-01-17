@@ -138,6 +138,7 @@
                             var aImgHref = document.createElement('a');
                             aImgHref.setAttribute('href',data.link);
                             imgLink.setAttribute('src',data.img);
+                            imgLink.setAttribute('onerror',"if (this.src != 'default.png') this.src = 'default.png';");
                             
                             aImgHref.appendChild(imgLink);
                             imgDiv.appendChild(aImgHref);

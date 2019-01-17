@@ -8,6 +8,7 @@
     <title>MongoChat</title>
     <style>
         #messages{height:300px;}
+        img{max-width: 250px;height: auto;}
     </style>
 </head>
 <body>
@@ -72,7 +73,6 @@
 
                 // Handle Output
                 socket.on('output', function(data){
-                    //console.log(data);
                     if(data.length){
                         for(var x = 0;x < data.length;x++){
                             // Build out message div
@@ -103,23 +103,55 @@
                 });
 
                 socket.on('updates',function(data){
-                    if(data.length){
+                    console.log('Updating data...');
+                    console.log('Data: ',data);
+                    //if(data.length){
+                        //console.log('Data length: ',data.length);
                         var messageToUpdate = element(data.id);
-                        for(var x = 0; x < data.length; x++){
+                        //for(var x = 0; x < data.length; x++){
+                            
                             var messagePreview = document.createElement('div');
                             
+                            var aDiv = document.createElement('div');
                             var aLink = document.createElement('a');
-                            aLink.setAttribute('href',data.urlData.link);
-                            var imgLink = document.createElement('img')
-                            imgLink.setAttribute('src',data.urlData.img);
-                            messagePreview.appendChild(aLink);
-                            messagePreview.appendChild(imgLink);
+                            aLink.textContent = data.link;
+                            aLink.setAttribute('href',data.link);
+                            aDiv.appendChild(aLink);
+
+                            var content = document.createElement('div');
+                            content.setAttribute('style','width: 100%; display: table;');
+                            var mainContent = document.createElement('div');
+                            mainContent.setAttribute('style','display: table-row');
+
                             
                             
+                            var titleDiv = document.createElement('div');
+                            titleDiv.setAttribute('style','width: 300px; display: table-cell;');
+                            var titleP = document.createElement('p');
+                            titleP.textContent = data.title;
+
+                            titleDiv.appendChild(titleP);
+                            messagePreview.appendChild(titleDiv);
+
+                            var imgDiv = document.createElement('div');
+                            imgDiv.setAttribute('style','width: 200px; display: table-cell;');
+                            var imgLink = document.createElement('img');
+                            var aImgHref = document.createElement('a');
+                            aImgHref.setAttribute('href',data.link);
+                            imgLink.setAttribute('src',data.img);
+                            
+                            aImgHref.appendChild(imgLink);
+                            imgDiv.appendChild(aImgHref);
+                            
+                            mainContent.appendChild(imgDiv);
+                            mainContent.appendChild(titleDiv);
+
+                            content.appendChild(mainContent);
+                            messagePreview.appendChild(content);
                             messageToUpdate.appendChild(messagePreview);
 
-                        }
-                    }
+                        //}
+                    //}
                 })
 
                 // Get Status From Server
@@ -139,7 +171,8 @@
                         // Emit to server input
                         socket.emit('input', {
                             name:username.value,
-                            message:textarea.value
+                            message:textarea.value,
+                            id: Date.now().toString()
                         });
 
                         event.preventDefault();

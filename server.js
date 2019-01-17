@@ -37,13 +37,13 @@ mongo.connect('mongodb://127.0.0.1/mongochat', function(err, db){
         socket.on('input', function(data){
             let name = data.name;
             let message = data.message;
-            let id = Date.now().toString();
+            let id = data.id;// = Date.now().toString();
             // Check for name and message
             if(name == '' || message == ''){
                 // Send error status
                 sendStatus('Please enter a name and message');
             } else {
-
+                //id = Date.now();
                 // link preview integration
                 if(urlValidation(message)){
                     chat.insert({name: name, message: message, id : id }, function(){
@@ -71,8 +71,10 @@ mongo.connect('mongodb://127.0.0.1/mongochat', function(err, db){
                             });
                         });*/
                         //#endregion
-                    
-                        socket.emit('updates', (urlData,id));
+                        
+                        var retVal = ({title: urlData.title, link: urlData.link, img: urlData.image,id:id});
+
+                        socket.emit('updates', retVal);
                     })
                     
 

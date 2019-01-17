@@ -13,6 +13,7 @@
     "mongodb": "^2.2.30",
     "nodemon": "^1.18.9",
     "request": "^2.88.0",
-    "socket.io": "^2.0.3"
+    "socket.io": "^2.0.3",
+    "url-to-screenshot": "^3.0.0"
   }
 }

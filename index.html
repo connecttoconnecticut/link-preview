@@ -79,9 +79,9 @@
                             var message = document.createElement('div');
                             message.setAttribute('class', 'chat-message');
                             message.setAttribute('id',data[x].id);
-                            //link preview integration*************************************************************************
-                            
-                            //#region Solution 1
+                            message.textContent = data[x].name+": "+ data[x].message;
+                             //#region Solution 1
+                            /*
                             if(data[x].link){
                                 message.textContent = data[x].name+": "+ data[x].message;
                                 var urlDiv = document.createElement('div');
@@ -94,6 +94,7 @@
                             }else{
                                 message.textContent = data[x].name+": "+ data[x].message;
                             }
+                            */
                             //#endregion
 
                             messages.appendChild(message);
@@ -123,8 +124,6 @@
                             var mainContent = document.createElement('div');
                             mainContent.setAttribute('style','display: table-row');
 
-                            
-                            
                             var titleDiv = document.createElement('div');
                             titleDiv.setAttribute('style','width: 300px; display: table-cell;');
                             var titleP = document.createElement('p');

@@ -1,5 +1,7 @@
 var request = require ('request');
 var cheerio = require ('cheerio');
+const Screenshot = require('url-to-screenshot')
+
 
 class LinkPreview{
     startDiscover(link,success,err){
@@ -36,9 +38,11 @@ class LinkPreview{
                    description = ( !descriptionMeta ? descriptionTag : descriptionMeta );
                 }
 
-                let img = $('meta[property="og:image"]').attr('content');
+                let imgContent = $('meta[property="og:image"]').attr('content');
 
-                if(img == null){
+                if(imgContent == null){
+                    //#region Solution one
+                    
                     var greatest = null;
                     $('img').each(function(i,element){
                         var myImageElementTemp = {
@@ -54,15 +58,35 @@ class LinkPreview{
                     });
 
                     if(greatest != null){
-                        img = link + greatest.src;
+                        imgContent = link + greatest.src;
+                        console.log('Image taken by discover ...');
                     }else{
-                        img = 'Do page screenshot';
+                        imgContent = 'Do page screenshot';
                     }
-                }
+                    //#endregion
 
-                console.log('Image is: ', img);
-                
-                success({image : img , description : description, title : title, link : link});
+                    //#region  ScreenShot Solution
+                    /*
+                    const ss = new Screenshot(link)
+                        .width(800)
+                        .height(600)
+                        .ignoreSslErrors()
+                        .sslProtocol('any')
+                        .clip()
+                        .capture()
+                        .then( img => 
+                            console.log('Screenshot image:',img)
+                            //success({image : ss, description : description, title : title, link : link})
+                        )
+                    console.log(typeof ss);
+                    */
+                    //#endregion
+                    
+                }else{
+                    console.log('Image is: ',imgContent);
+                    
+                }
+                success({image : imgContent , description : description, title : title, link : link});
                 //return ({image : img , description : description, title : title, link : link});
 
             }

@@ -25,12 +25,12 @@
 .chat-url-preview-logo-content{
     height: 40px;
     width: 40px;
-    display: table;
+    display: inline-block;
     clear: both;
+
 }
 
 .chat-url-preview-logo-column{
-    float: left;
     padding: 2px;
     font-size: 12px;
 }

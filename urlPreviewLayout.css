@@ -7,21 +7,51 @@
     display: table;
 }
 
-.preview-img-content{
+.chat-url-preview-img-content{
     display: table-row;
     overflow: auto;
 }
 
-.preview-img{
+.chat-url-preview-img{
     max-width: 100%;
     max-height: 100%;
 }
 
-.preview-text-content{
+.chat-url-preview-text-content{
     padding: 8px;
 }
 
-.preview-logo-content{
-    height: 30px;
-    width: 30px;
+
+.chat-url-preview-logo-content{
+    height: 40px;
+    width: 40px;
+    display: table;
+    clear: both;
+}
+
+.chat-url-preview-logo-column{
+    float: left;
+    padding: 2px;
+    font-size: 12px;
+}
+
+.chat-url-preview-site-logo{
+    padding: 2px;
+    padding-left: 2px;
+}
+
+.chat-url-preview-title{
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.chat-url-preview-description{
+    font-size: 11px;
+
+}
+
+
+.test-div{
+    height: 300px;
+    width: 500px;
 }

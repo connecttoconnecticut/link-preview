@@ -127,11 +127,11 @@
                             //IMAGE CONTENT
                             var imageContent = document.createElement('div');
                             messagePreview.appendChild(imageContent);
-                            imageContent.setAttribute('class','preview-img-content');
+                            imageContent.setAttribute('class','chat-url-preview-img-content');
                             
                             var imgDiv = document.createElement('div');
                             imageContent.appendChild(imgDiv);
-                            imgDiv.setAttribute('class','preview-img-content');/*display: table-cell;*/
+                            imgDiv.setAttribute('class','chat-url-preview-img-content');/*display: table-cell;*/
                             var imgLink = document.createElement('img');
                             imgLink.setAttribute('class','preview-img');
                             var aImgHref = document.createElement('a');
@@ -160,11 +160,24 @@
                             messageToUpdate.appendChild(messagePreview);
                             //sourceLogo
                             var logoContent = document.createElement('div');
+                            logoContent.setAttribute('class','chat-url-preview-logo-content');
+                            var logoImage = document.createElement('div');
+                            logoImage.setAttribute('class','chat-url-preview-logo-column');
+                            var logoText = document.createElement('div');
+                            logoText.setAttribute('class','chat-url-preview-logo-column');
+                            
+                            logoContent.appendChild(logoImage);
+                            logoContent.appendChild(logoText);
+
+                             
                             textContent.appendChild(logoContent);
                             var logoLink = document.createElement('img');
-                            logoContent.appendChild(logoLink);
+                            logoImage.appendChild(logoLink);
                             logoLink.setAttribute('src',data.icon);
-                            logoLink.setAttribute('class','preview-logo-content');
+                            logoLink.setAttribute('class','chat-url-preview-site-logo');
+                            var site = document.createElement('a');
+                            logoText.appendChild(site);
+                            site.textContent = data.rootSite;
                             
 
 

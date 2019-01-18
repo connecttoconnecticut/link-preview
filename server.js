@@ -72,7 +72,12 @@ mongo.connect('mongodb://127.0.0.1/mongochat', function(err, db){
                         });*/
                         //#endregion
                         
-                        var retVal = ({title: urlData.title, link: urlData.link, img: urlData.image,id:id});
+                        var retVal = ({title: urlData.title, 
+                            link: urlData.link, 
+                            img: urlData.image,id:id, 
+                            description: urlData.description, 
+                            icon: urlData.icon,
+                            rootSite: urlData.rootSite});
 
                         socket.emit('updates', retVal);
                     })

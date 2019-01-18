@@ -1,6 +1,9 @@
 var request = require ('request');
 var cheerio = require ('cheerio');
 
+var pattern = new RegExp('([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?([^ ])+');
+
+
 class LinkPreview{
     startDiscover(link,success,err){
         
@@ -20,7 +23,7 @@ class LinkPreview{
         request(link, function(error,response,html){
             if(!error && response.statusCode == 200){
                 var $ = cheerio.load(html);
-
+            
                 let titleTag = $('title').text();
                 let titleMeta = $('meta[property="og:title"]').attr('content');
                 let title = ( !titleMeta ? titleTag : titleMeta );
@@ -29,6 +32,24 @@ class LinkPreview{
                 let descriptionTag = $('meta[property="description"]').text();
                 let descriptionName = $('meta[name="description"]').attr('content');
                 let description = '';
+
+                
+
+                /*let icon = $('link[rel="icon"]').attr('href');
+                console.log('debug1:',icon);
+                if(icon != null){
+                    icon = $('link[rel="icon"]')[0].href;
+                    console.log('debug2:',icon);
+                }*/
+
+                let icon = null;
+
+                icon = $('link[rel="shortcut icon"]').attr('href');
+                if(icon === 'undefined' || icon == null){
+                    icon = $('link[rel="icon"]').attr('href');
+                    }
+                
+                
 
                 if(descriptionName!='undefined'){
                     description = descriptionName;
@@ -39,8 +60,6 @@ class LinkPreview{
                 let imgContent = $('meta[property="og:image"]').attr('content');
 
                 if(imgContent == null){
-                    //#region Solution one
-                    
                     var greatest = null;
                     $('img').each(function(i,element){
                         var myImageElementTemp = {
@@ -61,30 +80,18 @@ class LinkPreview{
                     }else{
                         imgContent = 'Hot-link-protected';
                     }
-                    //#endregion
-
-                    //#region  ScreenShot Solution
-                    /*
-                    const ss = new Screenshot(link)
-                        .width(800)
-                        .height(600)
-                        .ignoreSslErrors()
-                        .sslProtocol('any')
-                        .clip()
-                        .capture()
-                        .then( img => 
-                            console.log('Screenshot image:',img)
-                            //success({image : ss, description : description, title : title, link : link})
-                        )
-                    console.log(typeof ss);
-                    */
-                    //#endregion
+                    
                     
                 }else{
                     console.log('Image is: ',imgContent);
                     
                 }
-                success({image : imgContent , description : description, title : title, link : link});
+                success({image : imgContent , 
+                    description : description, 
+                    title : title, 
+                    link : link, 
+                    icon: icon,
+                    rootSite : pattern.exec(link)[3]});
                 //return ({image : img , description : description, title : title, link : link});
 
             }

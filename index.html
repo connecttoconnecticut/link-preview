@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="urlPreviewLayout.css">;
     <title>MongoChat</title>
     <style>
         #messages{height:300px;}
-        img{max-width: 250px;height: auto;}
+        /*img{max-width: 250px;height: auto;}*/
     </style>
 </head>
 <body>
@@ -111,44 +112,61 @@
                         var messageToUpdate = element(data.id);
                         //for(var x = 0; x < data.length; x++){
                             
+                            //whole preview
                             var messagePreview = document.createElement('div');
+                            messagePreview.setAttribute('class','chat-url-preview');
                             
-                            var aDiv = document.createElement('div');
+
+                            /* 
+                             var aDiv = document.createElement('div');
                             var aLink = document.createElement('a');
                             aLink.textContent = data.link;
                             aLink.setAttribute('href',data.link);
                             aDiv.appendChild(aLink);
-
-                            var content = document.createElement('div');
-                            content.setAttribute('style','width: 100%; display: table;');
-                            var mainContent = document.createElement('div');
-                            mainContent.setAttribute('style','display: table-row');
-
-                            var titleDiv = document.createElement('div');
-                            titleDiv.setAttribute('style','width: 300px; display: table-cell;');
-                            var titleP = document.createElement('p');
-                            titleP.textContent = data.title;
-
-                            titleDiv.appendChild(titleP);
-                            messagePreview.appendChild(titleDiv);
-
+                            */
+                            //IMAGE CONTENT
+                            var imageContent = document.createElement('div');
+                            messagePreview.appendChild(imageContent);
+                            imageContent.setAttribute('class','preview-img-content');
+                            
                             var imgDiv = document.createElement('div');
-                            imgDiv.setAttribute('style','width: 200px; display: table-cell;');
+                            imageContent.appendChild(imgDiv);
+                            imgDiv.setAttribute('class','preview-img-content');/*display: table-cell;*/
                             var imgLink = document.createElement('img');
+                            imgLink.setAttribute('class','preview-img');
                             var aImgHref = document.createElement('a');
                             aImgHref.setAttribute('href',data.link);
                             imgLink.setAttribute('src',data.img);
                             imgLink.setAttribute('onerror',"if (this.src != 'default.png') this.src = 'default.png';");
-                            
                             aImgHref.appendChild(imgLink);
                             imgDiv.appendChild(aImgHref);
-                            
-                            mainContent.appendChild(imgDiv);
-                            mainContent.appendChild(titleDiv);
 
-                            content.appendChild(mainContent);
-                            messagePreview.appendChild(content);
+                            
+                            //TEXT CONTENT
+                            var textContent = document.createElement('div');
+                            messagePreview.appendChild(textContent);
+                            //title
+                            var titleContent = document.createElement('div');
+                            textContent.appendChild(titleContent);
+                            var titleText = document.createElement('h1');
+                            titleContent.appendChild(titleText);
+                            titleText.textContent = data.title;
+                            //description
+                            var descriptionContent = document.createElement('div');
+                            textContent.appendChild(descriptionContent);
+                            var descriptionP = document.createElement('p');
+                            descriptionContent.appendChild(descriptionP);
+                            descriptionP.textContent = data.description;
                             messageToUpdate.appendChild(messagePreview);
+                            //sourceLogo
+                            var logoContent = document.createElement('div');
+                            textContent.appendChild(logoContent);
+                            var logoLink = document.createElement('img');
+                            logoContent.appendChild(logoLink);
+                            logoLink.setAttribute('src',data.icon);
+                            logoLink.setAttribute('class','preview-logo-content');
+                            
+
 
                         //}
                     //}

@@ -1,7 +1,5 @@
 var request = require ('request');
 var cheerio = require ('cheerio');
-const Screenshot = require('url-to-screenshot')
-
 
 class LinkPreview{
     startDiscover(link,success,err){
@@ -61,7 +59,7 @@ class LinkPreview{
                         imgContent = link + greatest.src;
                         console.log('Image taken by discover ...');
                     }else{
-                        imgContent = 'Do page screenshot';
+                        imgContent = 'Hot-link-protected';
                     }
                     //#endregion
 

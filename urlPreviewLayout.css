@@ -10,6 +10,9 @@
 .chat-url-preview-img-content{
     display: table-row;
     overflow: auto;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
 }
 
 .chat-url-preview-img{
@@ -23,22 +26,16 @@
 
 
 .chat-url-preview-logo-content{
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 100%;
     display: inline-block;
-    clear: both;
-
-}
-
-.chat-url-preview-logo-column{
-    padding: 2px;
-    font-size: 12px;
-}
-
-.chat-url-preview-site-logo{
+    white-space: nowrap;
     padding: 2px;
     padding-left: 2px;
+    font-size: 10px;
+
 }
+
 
 .chat-url-preview-title{
     font-size: 18px;

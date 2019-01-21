@@ -116,14 +116,6 @@
                             var messagePreview = document.createElement('div');
                             messagePreview.setAttribute('class','chat-url-preview');
                             
-
-                            /* 
-                             var aDiv = document.createElement('div');
-                            var aLink = document.createElement('a');
-                            aLink.textContent = data.link;
-                            aLink.setAttribute('href',data.link);
-                            aDiv.appendChild(aLink);
-                            */
                             //IMAGE CONTENT
                             var imageContent = document.createElement('div');
                             messagePreview.appendChild(imageContent);
@@ -133,7 +125,7 @@
                             imageContent.appendChild(imgDiv);
                             imgDiv.setAttribute('class','chat-url-preview-img-content');/*display: table-cell;*/
                             var imgLink = document.createElement('img');
-                            imgLink.setAttribute('class','preview-img');
+                            imgLink.setAttribute('class','chat-url-preview-img');
                             var aImgHref = document.createElement('a');
                             aImgHref.setAttribute('href',data.link);
                             imgLink.setAttribute('src',data.img);
@@ -145,16 +137,19 @@
                             //TEXT CONTENT
                             var textContent = document.createElement('div');
                             messagePreview.appendChild(textContent);
+                            textContent.setAttribute('class','chat-url-preview-text-content');
                             //title
                             var titleContent = document.createElement('div');
                             textContent.appendChild(titleContent);
-                            var titleText = document.createElement('h1');
+                            var titleText = document.createElement('p');
+                            titleText.setAttribute('class','chat-url-preview-title');
                             titleContent.appendChild(titleText);
                             titleText.textContent = data.title;
                             //description
                             var descriptionContent = document.createElement('div');
                             textContent.appendChild(descriptionContent);
                             var descriptionP = document.createElement('p');
+                            descriptionP.setAttribute('class','chat-url-preview-description');
                             descriptionContent.appendChild(descriptionP);
                             descriptionP.textContent = data.description;
                             messageToUpdate.appendChild(messagePreview);
@@ -162,21 +157,12 @@
                             var logoContent = document.createElement('div');
                             logoContent.setAttribute('class','chat-url-preview-logo-content');
                             var logoImage = document.createElement('div');
-                            logoImage.setAttribute('class','chat-url-preview-logo-column');
-                            var logoText = document.createElement('div');
-                            logoText.setAttribute('class','chat-url-preview-logo-column');
-                            
-                            logoContent.appendChild(logoImage);
-                            logoContent.appendChild(logoText);
-
-                             
-                            textContent.appendChild(logoContent);
                             var logoLink = document.createElement('img');
                             logoImage.appendChild(logoLink);
                             logoLink.setAttribute('src',data.icon);
-                            logoLink.setAttribute('class','chat-url-preview-site-logo');
+                            logoLink.setAttribute('onerror',"this.style.display='none'");
                             var site = document.createElement('a');
-                            logoText.appendChild(site);
+                            logoLink.append(site);
                             site.textContent = data.rootSite;
                             
 

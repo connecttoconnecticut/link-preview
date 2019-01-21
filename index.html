@@ -129,7 +129,7 @@
                             var aImgHref = document.createElement('a');
                             aImgHref.setAttribute('href',data.link);
                             imgLink.setAttribute('src',data.img);
-                            imgLink.setAttribute('onerror',"if (this.src != 'default.png') this.src = 'default.png';");
+                            imgLink.setAttribute('onerror',"if (this.src != 'default.png') this.src = '" + data.icon + "';if(this.onerror=null) this.src = 'defaut.jpg'");
                             aImgHref.appendChild(imgLink);
                             imgDiv.appendChild(aImgHref);
 
@@ -155,14 +155,16 @@
                             messageToUpdate.appendChild(messagePreview);
                             //sourceLogo
                             var logoContent = document.createElement('div');
+                            textContent.appendChild(logoContent);
                             logoContent.setAttribute('class','chat-url-preview-logo-content');
                             var logoImage = document.createElement('div');
                             var logoLink = document.createElement('img');
+                            logoContent.appendChild(logoImage);
                             logoImage.appendChild(logoLink);
                             logoLink.setAttribute('src',data.icon);
                             logoLink.setAttribute('onerror',"this.style.display='none'");
                             var site = document.createElement('a');
-                            logoLink.append(site);
+                            logoImage.appendChild(site);
                             site.textContent = data.rootSite;
                             
 
